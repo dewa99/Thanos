@@ -11,11 +11,13 @@ const MAX_RUNNING_SPEED = 10
 const ACCEL = 2
 const DEACCEL = 100
 
-var jump_height = 15
+var jump_height = 10
 var physic_status = 0
 var anim_player
 var timer
 var punch
+var enemy
+var puncharea
 
 #trigger
 var is_jump = true
@@ -26,8 +28,10 @@ var hit_counter = 0
 
 func _ready():
 	anim_player = get_node("head/thanos/AnimationPlayer")
-	timer = $Timer
-	punch = $hitcounter
+	timer = get_node("../Timer")
+	punch = get_node("../hitcounter")
+	enemy = get_node("../enemy")
+
 	pass
 
 func _physics_process(delta):
@@ -51,15 +55,23 @@ func walk(delta):
 			physic_status = 1
 		if Input.is_action_pressed("move_backward"):
 			direction += aim.z
+			physic_status = 1
+		if Input.is_action_pressed("move_left"):
+			direction -=aim.x
+			physic_status = 1
+		if Input.is_action_pressed("move_right"):
+			direction +=aim.x
+			physic_status = 1
 	
 	if Input.is_action_just_pressed("punch") and punch_on:
 		punch.start()
 		
 	
-	if $hitcounter.time_left<0:
+	if punch.time_left>0:
 		physic_status = 4
 		is_moving  = false
 		punch_on = false
+	
 	
 	direction = direction.normalized()
 	velocity.y += gravity * delta
@@ -81,6 +93,8 @@ func walk(delta):
 	else:
 		acceleration = DEACCEL
 	
+	
+	
 	temp_velocity = temp_velocity.linear_interpolate(target,acceleration * delta)
 	velocity.x = temp_velocity.x
 	velocity.z = temp_velocity.z
@@ -94,7 +108,11 @@ func walk(delta):
 		is_jump = true
 		timer.start()
 		velocity.y = jump_height
+		
 	
+	if Input.is_action_just_pressed("jump") and Input.is_action_pressed("kick") and is_on_floor():
+		is_jump = true
+		velocity.y = 25
 	
 	
 	if timer.time_left >0 :
@@ -133,7 +151,7 @@ func _input(event):
 		$head.rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		
 		var change = -event.relative.y * mouse_sensitivity
-		if change + camera_angle < 30 and change+camera_angle>-20:
+		if change + camera_angle < 90 and change+camera_angle>-60:
 			$head/Camera.rotate_x(deg2rad(change))
 			camera_angle +=change
 
@@ -149,4 +167,8 @@ func _on_hitcounter_timeout():
 	if hit_counter == 2:
 		hit_counter = 0
 		
+	pass # replace with function body
+
+func _on_Area_body_entered(body):
+	enemy.entered = 1
 	pass # replace with function body

@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/thanos.png" type="Texture" id=1]
+[ext_resource path="res://main_menu.gd" type="Script" id=2]
+[ext_resource path="res://UI/about.png" type="Texture" id=3]
+[ext_resource path="res://UI/help.png" type="Texture" id=4]
+[ext_resource path="res://UI/Start.png" type="Texture" id=5]
+[ext_resource path="res://UI/exit.png" type="Texture" id=6]
+
+[node name="thanos" type="Sprite" index="0"]
+
+position = Vector2( 577.28, 300.121 )
+scale = Vector2( 0.663426, 0.662832 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="about" type="Button" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -728.0
+margin_top = 237.0
+margin_right = -508.0
+margin_bottom = 290.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 3 )
+flat = true
+align = 1
+_sections_unfolded = [ "Mouse" ]
+
+[node name="help" type="Button" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -701.0
+margin_top = 169.0
+margin_right = -535.0
+margin_bottom = 222.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 4 )
+flat = true
+align = 1
+_sections_unfolded = [ "Mouse" ]
+
+[node name="start" type="Button" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -706.0
+margin_top = 103.0
+margin_right = -522.0
+margin_bottom = 156.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
+group = null
+icon = ExtResource( 5 )
+flat = true
+align = 1
+_sections_unfolded = [ "Mouse" ]
+
+[node name="exit" type="Button" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -690.0
+margin_top = 308.0
+margin_right = -549.0
+margin_bottom = 361.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 6 )
+flat = true
+align = 1
+_sections_unfolded = [ "Mouse" ]
+
+[connection signal="pressed" from="about" to="." method="_on_about_pressed"]
+
+[connection signal="pressed" from="help" to="." method="_on_help_pressed"]
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+
+

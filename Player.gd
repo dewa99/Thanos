@@ -144,7 +144,7 @@ func aim():
 		$head.rotate_y(deg2rad(-camera_cahnge.x *mouse_sensitivity))
 	
 		var change = camera_cahnge.y * mouse_sensitivity
-		if change + camera_angel < 20 and change + camera_angel > -20:
+		if change + camera_angel < 90 and change + camera_angel > -90:
 			$head/Camera.rotate_x(deg2rad(change))
 			camera_angel += change
 		camera_cahnge = Vector2()
